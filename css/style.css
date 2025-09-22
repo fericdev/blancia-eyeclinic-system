@@ -1,0 +1,174 @@
+/* Print styles */
+/* Print styles */
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  #non-printable {
+    display: none; /* hide non-printable area */
+  }
+  #printable * {
+    visibility: visible; /* show only printable area */
+    position: relative;
+    width: 8.5in; /* A4 width */
+    height: 11in; /* A4 height */
+    overflow: hidden;
+  }
+  .overlay-text {
+    position: absolute !important;
+  }
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    #f0f4f9,
+    #d9e4ec
+  ); /* soft modern gradient */
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: #333;
+}
+
+/* Card styling (input form) */
+.card {
+  border: none;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* Inputs */
+.form-control,
+textarea {
+  border-radius: 12px;
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus,
+textarea:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}
+
+/* Button */
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd, #0056d2);
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0056d2, #0a58ca);
+  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Printable area */
+#printable {
+  visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  width: 8.5in;
+  height: 11in;
+  background: #fafafa; /* light paper background */
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Overlay text (unchanged but cleaner color) */
+.overlay-text {
+  position: absolute;
+  color: #212529;
+  background: rgba(255, 255, 255, 0);
+  font-size: 11pt;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Adjust positions for each field */
+#nameOverlay {
+  top: 65px;
+  left: 150px;
+  width: 300px;
+}
+#ageOverlay {
+  top: 65px;
+  left: 450px;
+  width: 50px;
+}
+#sexOverlay {
+  top: 65px;
+  left: 520px;
+  width: 50px;
+}
+#statusOverlay {
+  top: 65px;
+  left: 630px;
+  width: 80px;
+}
+
+#addressOverlay {
+  top: 85px;
+  left: 160px;
+  width: 580px;
+}
+#birthdateOverlay {
+  top: 85px;
+  left: 485px;
+  width: 100px;
+}
+#telOverlay {
+  top: 85px;
+  left: 630px;
+  width: 100px;
+}
+#occupationOverlay {
+  top: 105px;
+  left: 185px;
+  width: 250px;
+}
+#referredOverlay {
+  top: 105px;
+  left: 460px;
+  width: 200px;
+}
+#dateOverlay {
+  top: 105px;
+  left: 630px;
+  width: 100px;
+}
+
+/* Video background */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover; /* covers entire screen */
+  z-index: -1; /* behind all content */
+}
+
+/* Optional: dark overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35); /* adjust for brightness */
+  z-index: 0;
+}
