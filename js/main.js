@@ -90,7 +90,53 @@ function setupAddressAutocomplete() {
   });
 }
 
+function setupOccupationAutocomplete() {
+  const occupations = [
+    "Teacher",
+    "Nurse",
+    "Doctor",
+    "Engineer",
+    "Software Developer",
+    "Farmer",
+    "Fisherman",
+    "Driver",
+    "Cashier",
+    "Police Officer",
+    "Soldier",
+    "Construction Worker",
+    "Call Center Agent",
+    "Sales Clerk",
+    "Mechanic",
+    "Electrician",
+    "Plumber",
+    "Carpenter",
+    "Chef",
+    "Accountant",
+    "None",
+  ];
+
+  $("#occupation").on("input", function () {
+    let q = $(this).val().toLowerCase();
+    $("#occupationSuggestions").empty();
+
+    if (q.length < 2) return;
+
+    const filtered = occupations.filter((o) => o.toLowerCase().includes(q));
+    filtered.forEach((o) =>
+      $("#occupationSuggestions").append(
+        `<li class="list-group-item">${o}</li>`
+      )
+    );
+  });
+
+  $(document).on("click", "#occupationSuggestions li", function () {
+    $("#occupation").val($(this).text());
+    $("#occupationSuggestions").empty();
+  });
+}
+
 $(document).ready(function () {
   $("#birthdate").on("change input", updateAge);
   setupAddressAutocomplete();
+  setupOccupationAutocomplete();
 });
