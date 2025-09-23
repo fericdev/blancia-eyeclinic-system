@@ -1,51 +1,70 @@
 // Populate overlay fields and print
 function printTemplate() {
-  document.getElementById("nameOverlay").textContent =
-    document.getElementById("name").value;
-  document.getElementById("ageOverlay").textContent =
-    document.getElementById("age").value;
-  document.getElementById("sexOverlay").textContent =
-    document.getElementById("sex").value;
-  document.getElementById("statusOverlay").textContent =
-    document.getElementById("status").value;
-  document.getElementById("addressOverlay").textContent =
-    document.getElementById("address").value;
-  document.getElementById("telOverlay").textContent =
-    document.getElementById("tel").value;
-  document.getElementById("occupationOverlay").textContent =
-    document.getElementById("occupation").value;
-  document.getElementById("referredOverlay").textContent =
-    document.getElementById("referred").value;
+  $("#nameOverlay").text($("#name").val());
+  $("#ageOverlay").text($("#age").val());
+  $("#sexOverlay").text($("#sex").val());
+  $("#statusOverlay").text($("#status").val());
+  $("#addressOverlay").text($("#address").val());
+  $("#telOverlay").text($("#tel").val());
+  $("#occupationOverlay").text($("#occupation").val());
+  $("#referredOverlay").text($("#referred").val());
 
   const today = new Date();
   if (today) {
     const formattedDate = today.toLocaleDateString("en-US");
-    // Get time in h:mm AM/PM
     const formattedTime = today.toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
     });
-    // DD/MM/YYYY
-    document.getElementById(
-      "dateOverlay"
-    ).textContent = `${formattedDate} ${formattedTime}`;
+
+    $("#dateOverlay").text(`${formattedDate} ${formattedTime}`);
   }
 
-  const birthdateValue = document.getElementById("birthdate").value; // yyyy-mm-dd
+  const birthdateValue = $("#birthdate").val(); // yyyy-mm-dd
   if (birthdateValue) {
     const date = new Date(birthdateValue);
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const dd = String(date.getDate()).padStart(2, "0");
     const yyyy = date.getFullYear();
     const formatted = `${mm}/${dd}/${yyyy}`;
-    document.getElementById("birthdateOverlay").textContent = formatted;
+
+    $("#birthdateOverlay").text(formatted);
   }
 
-  const template = document.getElementById("printable");
-  if (template) {
-    template.style.display = "block";
+  const $template = $("#printable");
+  if ($template.length) {
+    $template.show();
     window.print();
-    template.style.display = "none";
+    $template.hide();
   }
 }
+
+function updateAge() {
+  const birthdateValue = $("#birthdate").val();
+  if (!birthdateValue || birthdateValue.length < 10) {
+    $("#age").val("");
+    return;
+  }
+
+  const birthdate = new Date(birthdateValue);
+  if (isNaN(birthdate)) {
+    $("#age").val("");
+    return;
+  }
+
+  const today = new Date();
+  let age = today.getFullYear() - birthdate.getFullYear();
+  const monthDiff = today.getMonth() - birthdate.getMonth();
+  const dayDiff = today.getDate() - birthdate.getDate();
+
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    age--;
+  }
+
+  $("#age").val(age >= 0 ? age : "0");
+}
+
+$(document).ready(function () {
+  $("#birthdate").on("change input", updateAge);
+});
