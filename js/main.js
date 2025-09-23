@@ -65,6 +65,32 @@ function updateAge() {
   $("#age").val(age >= 0 ? age : "0");
 }
 
+function setupAddressAutocomplete() {
+  $("#address").on("input", function () {
+    let q = $(this).val();
+    if (q.length < 3) return $("#suggestions").empty();
+
+    $.getJSON(
+      "https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=ph&q=" +
+        q,
+      function (data) {
+        $("#suggestions").empty();
+        data.forEach((p) =>
+          $("#suggestions").append(
+            `<li class="list-group-item">${p.display_name}</li>`
+          )
+        );
+      }
+    );
+  });
+
+  $(document).on("click", "#suggestions li", function () {
+    $("#address").val($(this).text());
+    $("#suggestions").empty();
+  });
+}
+
 $(document).ready(function () {
   $("#birthdate").on("change input", updateAge);
+  setupAddressAutocomplete();
 });
