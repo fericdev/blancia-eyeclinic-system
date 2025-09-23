@@ -16,7 +16,7 @@
     </video>
 
     <div class="container py-5" id="non-printable">
-      <div class="card shadow-sm mx-auto" style="max-width: 700px">
+      <div class="card shadow-sm mx-auto" style="max-width: 900px">
         <div class="card-body">
           <h4 class="card-title mb-4 text-center">Patient Info Form</h4>
           <form id="patientForm">
@@ -41,21 +41,19 @@
               </div>
               <div class="col">
                 <label class="form-label">Sex</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="sex"
-                  placeholder="M/F"
-                />
+                <select id="sex" class="form-select">
+                  <option value="" disabled selected>Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
               </div>
               <div class="col">
                 <label class="form-label">Status</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="status"
-                  placeholder="Single/Married"
-                />
+                <select id="status" class="form-select">
+                  <option value="" disabled selected>Select</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
               </div>
             </div>
             <div class="mb-3">

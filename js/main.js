@@ -19,8 +19,17 @@ function printTemplate() {
 
   const today = new Date();
   if (today) {
-    const formattedDate = today.toLocaleDateString("en-US"); // DD/MM/YYYY
-    document.getElementById("dateOverlay").textContent = formattedDate;
+    const formattedDate = today.toLocaleDateString("en-US");
+    // Get time in h:mm AM/PM
+    const formattedTime = today.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+    // DD/MM/YYYY
+    document.getElementById(
+      "dateOverlay"
+    ).textContent = `${formattedDate} ${formattedTime}`;
   }
 
   const birthdateValue = document.getElementById("birthdate").value; // yyyy-mm-dd
