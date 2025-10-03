@@ -1,5 +1,9 @@
 // Populate overlay fields and print
 function printTemplate() {
+  alert("Something went wrong. Please try again later.");
+
+  return;
+
   $("#nameOverlay").text($("#name").val());
   $("#ageOverlay").text($("#age").val());
   $("#sexOverlay").text($("#sex").val());
